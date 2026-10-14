@@ -79,6 +79,7 @@ else()
 
     target_sources(cortexactuate_test PRIVATE
         test/test_main.cpp
+        test/hal_contract_test.cpp
     )
 
     target_link_libraries(cortexactuate_test
