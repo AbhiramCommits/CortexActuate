@@ -1,0 +1,16 @@
+build/
+build-arm/
+build-host/
+*.o
+*.a
+*.so
+*.bin
+*.hex
+*.elf
+*.map
+*.d
+cortexactuate_test
+cortexactuate_sil
+.DS_Store
+reports/
+out/
