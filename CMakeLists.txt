@@ -81,6 +81,8 @@ else()
         test/test_main.cpp
         test/hal_contract_test.cpp
         test/control_test.cpp
+        test/telemetry_test.cpp
+        test/replay_test.cpp
     )
 
     target_link_libraries(cortexactuate_test
