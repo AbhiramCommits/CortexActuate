@@ -1,0 +1,34 @@
+[firmware]
+# Maximum firmware .text size (STM32F407 has 1MB FLASH)
+max_text_bytes = 262144  # 256 KB (26% of 1MB)
+max_data_bytes = 16384   # 16 KB (12% of 128KB SRAM)
+
+[timing]
+# Loop period at nominal 1 kHz
+loop_period_nominal_us = 1000
+
+# Maximum acceptable loop jitter
+max_loop_jitter_us = 10  # ±10 µs
+
+# Worst-case execution time (measured, not budgeted)
+max_execution_time_us = 100
+
+[fault_reaction]
+# Maximum time to reach DEGRADED state from fault detection
+max_heartbeat_latency_ms = 101
+max_crc_latency_ms = 10
+max_sequence_latency_ms = 10
+
+[memory]
+# Minimum stack headroom (bytes free)
+min_stack_headroom_bytes = 256
+
+# Maximum total static allocation
+max_static_allocation_bytes = 20480  # 20 KB
+
+[tests]
+# Minimum test case count
+min_test_cases = 20
+
+# Minimum assertion count
+min_assertions = 40

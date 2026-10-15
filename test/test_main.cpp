@@ -3,6 +3,4 @@
 
 class BasicTest : public ::testing::Test {};
 
-TEST_F(BasicTest, Placeholder) {
-    EXPECT_EQ(1, 1);
-}
+TEST_F(BasicTest, Placeholder) { EXPECT_EQ(1, 1); }

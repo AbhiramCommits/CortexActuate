@@ -3,11 +3,11 @@
 extern "C" {
 
 int main(void) {
-    /* Placeholder main — will be replaced by target_main.cpp in FreeRTOS integration */
-    while(1) {
-        asm volatile("nop");
-    }
-    return 0;
+  /* Placeholder main — will be replaced by target_main.cpp in FreeRTOS
+   * integration */
+  while (1) {
+    asm volatile("nop");
+  }
+  return 0;
 }
-
 }
