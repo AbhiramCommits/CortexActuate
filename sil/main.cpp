@@ -118,11 +118,6 @@ int main(int argc, char *argv[]) {
 
     // Inject CAN frame
     if (frame.id == 0x100 && frame.data.size() >= 4) {
-      CanFrame cf{};
-      cf.id = frame.id;
-      cf.dlc = frame.dlc;
-      cf.timestamp_us = frame.timestamp_us;
-
       // Extract command fields from frame
       uint8_t setpoint_int = frame.data[2]; // 0-200 scale
       uint8_t seq = frame.data[3];
