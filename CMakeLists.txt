@@ -23,7 +23,7 @@ if(CORTEXACTUATE_TARGET STREQUAL "STM32F407")
     # Startup and system init
     add_library(startup OBJECT
         src/startup/startup_stm32f4.c
-        src/startup/system_init.c
+        src/startup/system_init.cpp
         src/startup/main_stub.cpp
     )
     target_compile_options(startup PRIVATE -Wall -Wextra -Werror -Os)
