@@ -18,7 +18,14 @@ jobs:
           cd build-host
           ./cortexactuate_sil --trace ../sil/traces/nominal_drive.csv --telemetry /tmp/nominal.bin
           ./cortexactuate_sil --trace ../sil/traces/heartbeat_dropout.csv --telemetry /tmp/dropout.bin
-          ./cortexactuate_sil --trace ../sil/traces/corrupt_crc.csv --telemetry /tmp/corrupt.bin
+          # corrupt_crc injects a bad CRC; the SIL is expected to latch a fault
+          # and exit 1 (safe state). Assert that instead of failing the step.
+          rc=0
+          ./cortexactuate_sil --trace ../sil/traces/corrupt_crc.csv --telemetry /tmp/corrupt.bin || rc=$?
+          if [ "$rc" -ne 1 ]; then
+            echo "::error::corrupt_crc trace: expected fault exit code 1, got $rc"
+            exit 1
+          fi
       - name: Telemetry report
         run: python3 tools/telemetry_report.py /tmp/nominal.bin
       - name: Format check
@@ -29,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install ARM toolchain
-        run: sudo apt-get update && sudo apt-get install -y cmake arm-none-eabi-gcc arm-none-eabi-binutils
+        run: sudo apt-get update && sudo apt-get install -y cmake gcc-arm-none-eabi binutils-arm-none-eabi libnewlib-arm-none-eabi libstdc++-arm-none-eabi-newlib
       - name: Build firmware
         run: mkdir build-arm && cd build-arm && cmake -DCMAKE_TOOLCHAIN_FILE=../cmake/arm-none-eabi-toolchain.cmake -DCORTEXACTUATE_TARGET=STM32F407 .. && cmake --build .
       - name: Check size
